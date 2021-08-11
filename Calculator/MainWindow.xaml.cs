@@ -53,6 +53,10 @@ namespace Calculator
             value1 = screen.Text;
             dValue1 = Convert.ToDecimal(value1);
             screen.Text = String.Empty;
+            ButtonAdd.IsEnabled = false;
+            NegativeDecimalReset();
+            EnableNumbers();
+            ButtonEquals.IsEnabled = true;
         }
         private void Button_Click_Subtract(object sender, RoutedEventArgs e)
         {
@@ -60,6 +64,10 @@ namespace Calculator
             value1 = screen.Text;
             dValue1 = Convert.ToDecimal(value1);
             screen.Text = String.Empty;
+            ButtonSubtract.IsEnabled = false;
+            NegativeDecimalReset();
+            EnableNumbers();
+            ButtonEquals.IsEnabled = true;
         }
         private void Button_Click_Multiply(object sender, RoutedEventArgs e)
         {
@@ -67,6 +75,10 @@ namespace Calculator
             value1 = screen.Text;
             dValue1 = Convert.ToDecimal(value1);
             screen.Text = String.Empty;
+            ButtonMultiply.IsEnabled = false;
+            NegativeDecimalReset();
+            EnableNumbers();
+            ButtonEquals.IsEnabled = true;
         }
         private void Button_Click_Divide(object sender, RoutedEventArgs e)
         {
@@ -74,6 +86,10 @@ namespace Calculator
             value1 = screen.Text;
             dValue1 = Convert.ToDecimal(value1);
             screen.Text = String.Empty;
+            ButtonDivide.IsEnabled = false;
+            NegativeDecimalReset();
+            EnableNumbers();
+            ButtonEquals.IsEnabled = true;
         }
         private void Button_Click_Equal(object sender, RoutedEventArgs e)
         {
@@ -106,18 +122,25 @@ namespace Calculator
             dValue1 = dResult;
             ResetOperators();
             AddToHistory();
+            ButtonNegative.IsEnabled = false;
+            ButtonDecimal.IsEnabled = false;
+            ButtonEquals.IsEnabled = false;
+            DisableNumbers();
         }
         private void Button_Click_Negative(object sender, RoutedEventArgs e)
         {
             screen.Text = "-" + screen.Text;
+            ButtonNegative.IsEnabled = false;
         }
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
         {
             screen.Text = String.Empty;
+            NegativeDecimalReset();
         }
         private void Button_Click_Clear(object sender, RoutedEventArgs e)
         {
             Clear();
+            EnableNumbers();
         }
         private void Button_Click_Square(object sender, RoutedEventArgs e)
         {
@@ -126,6 +149,10 @@ namespace Calculator
             dResult = dValue1 * dValue1;
             result = Convert.ToString(dResult);
             screen.Text = result;
+            history.Add($"{dValue1} ^2 = {dResult}");
+            ButtonNegative.IsEnabled = false;
+            ButtonDecimal.IsEnabled = false;
+            AddToHistory();
         }
         private void Button_Click_Sqrt(object sender, RoutedEventArgs e)
         {
@@ -134,6 +161,10 @@ namespace Calculator
             dResult = (decimal)Math.Sqrt((double)dValue1);
             result = Convert.ToString(dResult);
             screen.Text = result;
+            history.Add($"Sq Rt {dValue1} = {dResult}");
+            ButtonNegative.IsEnabled = false;
+            ButtonDecimal.IsEnabled = false;
+            AddToHistory();
         }
         private void Button_Click_Clear_History(object sender, RoutedEventArgs e)
         {
@@ -141,12 +172,23 @@ namespace Calculator
             history = null;
             Clear();
         }
+        private void Button_Click_Decimal(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            screen.Text = screen.Text + b.Content;
+            ButtonDecimal.IsEnabled = false;
+            EnableNumbers();
+        }
         private void ResetOperators()
         {
             add = false;
             subtract = false;
             multiply = false;
             divide = false;
+            ButtonAdd.IsEnabled = true;
+            ButtonSubtract.IsEnabled = true;
+            ButtonMultiply.IsEnabled = true;
+            ButtonDivide.IsEnabled = true;
         }
         private void Clear()
         {
@@ -156,14 +198,48 @@ namespace Calculator
             value2 = null;
             dValue1 = 0;
             dValue2 = 0;
+            NegativeDecimalReset();
+            EnableNumbers();
         }
         private void AddToHistory()
         {
             historyBox.Clear();
-            foreach(string history in history)
+            foreach (string history in history)
             {
                 historyBox.AppendText(history + Environment.NewLine);
             }
+        }
+        private void NegativeDecimalReset()
+        {
+            ButtonNegative.IsEnabled = true;
+            ButtonDecimal.IsEnabled = true;
+            ButtonSqRt.IsEnabled = true;
+        }
+        private void DisableNumbers()
+        {
+            Button0.IsEnabled = false;
+            Button1.IsEnabled = false;
+            Button2.IsEnabled = false;
+            Button3.IsEnabled = false;
+            Button4.IsEnabled = false;
+            Button5.IsEnabled = false;
+            Button6.IsEnabled = false;
+            Button7.IsEnabled = false;
+            Button8.IsEnabled = false;
+            Button9.IsEnabled = false;
+        }
+        private void EnableNumbers()
+        {
+            Button0.IsEnabled = true;
+            Button1.IsEnabled = true;
+            Button2.IsEnabled = true;
+            Button3.IsEnabled = true;
+            Button4.IsEnabled = true;
+            Button5.IsEnabled = true;
+            Button6.IsEnabled = true;
+            Button7.IsEnabled = true;
+            Button8.IsEnabled = true;
+            Button9.IsEnabled = true;
         }
     }
 }
