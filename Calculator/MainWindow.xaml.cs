@@ -56,7 +56,7 @@ namespace Calculator
             ButtonAdd.IsEnabled = false;
             NegativeDecimalReset();
             EnableNumbers();
-            ButtonEquals.IsEnabled = true;
+            DisableOperators();
         }
         private void Button_Click_Subtract(object sender, RoutedEventArgs e)
         {
@@ -68,6 +68,7 @@ namespace Calculator
             NegativeDecimalReset();
             EnableNumbers();
             ButtonEquals.IsEnabled = true;
+            DisableOperators();
         }
         private void Button_Click_Multiply(object sender, RoutedEventArgs e)
         {
@@ -79,6 +80,7 @@ namespace Calculator
             NegativeDecimalReset();
             EnableNumbers();
             ButtonEquals.IsEnabled = true;
+            DisableOperators();
         }
         private void Button_Click_Divide(object sender, RoutedEventArgs e)
         {
@@ -90,6 +92,7 @@ namespace Calculator
             NegativeDecimalReset();
             EnableNumbers();
             ButtonEquals.IsEnabled = true;
+            DisableOperators();
         }
         private void Button_Click_Equal(object sender, RoutedEventArgs e)
         {
@@ -240,6 +243,13 @@ namespace Calculator
             Button7.IsEnabled = true;
             Button8.IsEnabled = true;
             Button9.IsEnabled = true;
+        }
+        private void DisableOperators()
+        {
+            ButtonAdd.IsEnabled = false;
+            ButtonSubtract.IsEnabled = false;
+            ButtonDivide.IsEnabled = false;
+            ButtonMultiply.IsEnabled = false;
         }
     }
 }
