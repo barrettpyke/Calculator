@@ -147,27 +147,43 @@ namespace Calculator
         }
         private void Button_Click_Square(object sender, RoutedEventArgs e)
         {
-            value1 = screen.Text;
-            dValue1 = Convert.ToDecimal(value1);
-            dResult = dValue1 * dValue1;
-            result = Convert.ToString(dResult);
-            screen.Text = result;
-            history.Add($"{dValue1} ^2 = {dResult}");
-            ButtonNegative.IsEnabled = false;
-            ButtonDecimal.IsEnabled = false;
-            AddToHistory();
+            try
+            {
+                value1 = screen.Text;
+                dValue1 = Convert.ToDecimal(value1);
+                dResult = dValue1 * dValue1;
+                result = Convert.ToString(dResult);
+                screen.Text = result;
+                history.Add($"{dValue1} ^2 = {dResult}");
+                ButtonNegative.IsEnabled = false;
+                ButtonDecimal.IsEnabled = false;
+                AddToHistory();
+            }
+            catch (Exception ex)
+            {
+                screen.Text = "Error: Result too large to display. Please click Clear to proceed.";
+                DisableAll();
+            }
         }
         private void Button_Click_Sqrt(object sender, RoutedEventArgs e)
         {
-            value1 = screen.Text;
-            dValue1 = Convert.ToDecimal(value1);
-            dResult = (decimal)Math.Sqrt((double)dValue1);
-            result = Convert.ToString(dResult);
-            screen.Text = result;
-            history.Add($"Sq Rt {dValue1} = {dResult}");
-            ButtonNegative.IsEnabled = false;
-            ButtonDecimal.IsEnabled = false;
-            AddToHistory();
+            try
+            {
+                value1 = screen.Text;
+                dValue1 = Convert.ToDecimal(value1);
+                dResult = (decimal)Math.Sqrt((double)dValue1);
+                result = Convert.ToString(dResult);
+                screen.Text = result;
+                history.Add($"Sq Rt {dValue1} = {dResult}");
+                ButtonNegative.IsEnabled = false;
+                ButtonDecimal.IsEnabled = false;
+                AddToHistory();
+            }
+            catch (Exception ex)
+            {
+                screen.Text = "Error: Result too large to display. Please click Clear to proceed.";
+                DisableAll();
+            }
         }
         private void Button_Click_Clear_History(object sender, RoutedEventArgs e)
         {
@@ -203,6 +219,9 @@ namespace Calculator
             dValue2 = 0;
             NegativeDecimalReset();
             EnableNumbers();
+            ButtonSquare.IsEnabled = true;
+            ButtonDelete.IsEnabled = true;
+            ButtonEquals.IsEnabled = true;
         }
         private void AddToHistory()
         {
@@ -250,6 +269,16 @@ namespace Calculator
             ButtonSubtract.IsEnabled = false;
             ButtonDivide.IsEnabled = false;
             ButtonMultiply.IsEnabled = false;
+        }
+        private void DisableAll()
+        {
+            DisableNumbers();
+            DisableOperators();
+            ButtonSqRt.IsEnabled = false;
+            ButtonSquare.IsEnabled = false;
+            ButtonEquals.IsEnabled = false;
+            ButtonDelete.IsEnabled = false;
+            ButtonDecimal.IsEnabled = false;
         }
     }
 }

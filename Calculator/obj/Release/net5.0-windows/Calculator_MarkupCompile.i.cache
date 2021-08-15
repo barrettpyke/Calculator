@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\barre\git\Calculator\obj\Debug\net5.0-windows\
+C:\Users\barre\git\Calculator\obj\Release\net5.0-windows\
 Calculator
 none
 false
-TRACE;DEBUG;NET;NET5_0;NETCOREAPP
+TRACE;RELEASE;NET;NET5_0;NETCOREAPP
 C:\Users\barre\git\Calculator\App.xaml
 11407045341
 
-5-548540303
+5-406245912
 193-1891726104
 MainWindow.xaml;
 
-True
+False
 
